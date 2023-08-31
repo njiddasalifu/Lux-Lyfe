@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import validator from 'validator';
 
 import phoneSchema from '../schemas/phone.schema.js';
@@ -99,7 +99,7 @@ const userSchema = new Schema(
       createdAt: 'createdAt',
       updatedAt: 'updatedAt',
     },
-  }
+  },
 );
 
 // Virtual populate
@@ -161,7 +161,7 @@ userSchema.pre(/^find/, function (next) {
  */
 userSchema.methods.correctPassword = async function (
   candidatePassword,
-  userPassword
+  userPassword,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
@@ -174,7 +174,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
-      10
+      10,
     );
 
     return JWTTimestamp < changedTimestamp;
