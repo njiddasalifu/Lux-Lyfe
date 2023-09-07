@@ -11,7 +11,7 @@ const config = {
    */
   env: process.env.NODE_ENV,
   port: process.env.PORT || 9000,
-  prefix: process.env.API_PREFIX || '/api/v1',
+  prefix: process.env.API_PREFIX || '/api',
   /**
    * @breif Database for various environments
    */
