@@ -7,7 +7,7 @@ router.post('/login', authController.login);
 router.post('/signup', authController.signup);
 
 router.patch(
-  '/updateMyPassword',
+  '/update-my-Password',
   authController.protect,
   authController.updatePassword,
 );
