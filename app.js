@@ -11,9 +11,10 @@ import { Server } from 'socket.io';
 import config from './configurations/config.js';
 import globalErrorHandler from './controllers/error.controller.js';
 import AppError from './utilities/appError.js';
+import authRouter from './routes/auth.routes.js';
 import categoryRouter from './routes/category.routes.js';
-import userRouter from './routes/user.routes.js';
 import storeRouter from './routes/store.routes.js';
+import userRouter from './routes/user.routes.js';
 import productRouter from './routes/product.routes.js';
 import reviewRouter from './routes/review.routes.js';
 import cartRouter from './routes/cart.routes.js';
@@ -55,8 +56,9 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // ROUTES
-app.use(`${config.prefix}/categories`, categoryRouter);
+app.use(`${config.prefix}/auth`, authRouter);
 app.use(`${config.prefix}/users`, userRouter);
+app.use(`${config.prefix}/categories`, categoryRouter);
 app.use(`${config.prefix}/stores`, storeRouter);
 app.use(`${config.prefix}/products`, productRouter);
 app.use(`${config.prefix}/reviews`, reviewRouter);
