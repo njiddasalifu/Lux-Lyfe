@@ -5,25 +5,21 @@ import UserRole from '../utilities/enums/e.user-role.js';
 
 const router = Router();
 
-router.post('/signup', authController.signup);
-router.post('/login', authController.login);
-
 // Protected routes
 router.use(authController.protect);
 
 router.post(
   '/register',
   authController.restrictTo(UserRole.ADMIN),
-  userController.registerUser
+  userController.registerUser,
 );
 
-router.patch('/updateMyPassword', authController.updatePassword);
 router.get('/me', userController.getMe, userController.getUser);
 router.patch(
   '/updateMe',
   userController.uploadUserPhoto,
   userController.resizeUserPhoto,
-  userController.updateMe
+  userController.updateMe,
 );
 router.patch('/deleteMe', userController.deleteMe);
 
